@@ -1,1 +1,1 @@
-# Quranic Recitation 
+# Quranic app
