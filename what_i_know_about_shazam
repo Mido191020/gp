@@ -1,0 +1,39 @@
+Main idea:
+  - Identifying song using short segment of music captured using mobile microphone.
+  - uses noise cancellation.
+  - uses voice codec compression.
+  - uses a combinatorially hashed time-frequency constellation analysis of the audio.
+  - fetches hash code of song very fast from database.
+
+How it happens:
+- chopping audio file into small snippets then fingerprint each with a unique fingerprint.
+
+- using fingerprints ensures that the same snippet will always get the same fingerprint, and the fingerprint will only get the unique matching snippet.
+
+- fingerprint only considers the sounds in that tiny snippet, not stuff far away in the song to ensure that small changes far away won't mess up the fingerprint.
+
+- even if the song's quality is bad(due to background noise) or user uses an Equalizer to control  sound this doesn't affect points so much and the fingerprint should still recognizable.
+
+- to get song regardless of noise the method searches for strongest points in the sound's "fingerprint" (like an image showing how sound changes over time).
+
+- among the strong points, the method prioritizes the absolute strongest ones, because these are most likely to survive the noise.
+
+- it identifies these heigh points (peaks) using spectrogram.
+
+- sets these peaks into a map called constellation maps that contains their coordinates where points look like "starry sky" .
+
+- if there are noise in sound there should still be matching points between constellation maps so they can identify correct sound.
+
+- to find a song in recording database they compare need map with recorded constellation maps
+
+- this method makes searching very fast as it compares only stars not whole night sky.
+
+- it uses hashing techniques and combines pairs of stars from constellation map, these hash codes are listed in database along with their time location.
+
+- when searching for a music in database it compares hash code of entered music with database's recorded hash codes.
+
+- as the noise increases as searching complexity increases as patterns increase.
+
+- can only identify music that are recorded in databases not live ones.
+
+- fetch music with heighst match.
