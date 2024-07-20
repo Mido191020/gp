@@ -1,0 +1,8 @@
+This is an application for teaching the Holy Quran, as an educational tool for learning correct recitation and correct pronunciation, and also research and knowledge.
+-can we implement idea?
+-How do we deal with data? As storage?
+
+-Available search algorithms to deal with the size of data? How do we benefit from hashing
+
+-Models for recognizing original sounds and separating external sounds?
+-ml models for converting speech to text?
