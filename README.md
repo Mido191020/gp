@@ -4,4 +4,5 @@
 
 - **[Hugging Face](https://huggingface.co/)**: A popular platform for natural language processing (NLP) models and datasets.
 - **[OpenAI Whisper](https://github.com/openai/whisper)**: An OpenAI project for automatic speech recognition (ASR).
+- **[Marqo](https://www.marqo.ai/)**: A vector database and search engine for unstructured data, offering advanced search capabilities and AI-powered insights.
 
