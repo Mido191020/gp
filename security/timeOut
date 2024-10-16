@@ -1,4 +1,19 @@
-# Notes on Backend and Frontend Timeouts for GP (Shazam-like Application)
+# Backend and Frontend Timeouts for GP (Shazam-like Application)
+
+![Status: In Progress](https://img.shields.io/badge/Status-In%20Progress-yellow)
+![Language: JavaScript](https://img.shields.io/badge/Language-JavaScript-yellow?logo=javascript)
+
+This document outlines various timeout mechanisms and their implementation in our GP (Shazam-like) application.
+
+## Table of Contents
+- [What are Timeouts?](#1-what-are-timeouts)
+- [Types of Timeouts](#2-types-of-timeouts-in-frontend-backend-communication)
+- [Practical Examples](#3-practical-examples-for-gp)
+- [Key Benefits](#4-key-benefits-of-timeouts-in-the-project)
+- [Future Considerations](#5-future-implementation-considerations)
+- [Contributing](#contributing)
+
+---
 
 ## 1. What are Timeouts?
 Timeouts refer to a period after which a system operation is terminated if it hasn't completed. They are essential for managing system performance, preventing resource exhaustion, and ensuring that unresponsive processes do not block other operations.
@@ -37,6 +52,9 @@ Timeouts refer to a period after which a system operation is terminated if it ha
 ### a. Setting Timeouts in Node.js (Backend)
 In our backend (Node.js), we can set timeouts for both HTTP requests and database connections.
 
+<details>
+<summary>Node.js Timeout Example</summary>
+
 ```javascript
 // Example: Timeout for external API request (e.g., fetching song metadata)
 const axios = require('axios');
@@ -53,12 +71,16 @@ axios.get('https://example.com/song', { timeout: 5000 })  // 5 seconds timeout
     }
   });
 ```
+</details>
 
 **Why Use It in GP?**  
 When making requests to external services (e.g., an external song recognition API), timeouts ensure that if the service is slow or unresponsive, our app won't hang indefinitely. This is crucial for maintaining a smooth user experience.
 
 ### b. Handling Timeouts with SQL (Database)
 In our app, we will also query the database (e.g., to fetch or store audio fingerprints).
+
+<details>
+<summary>SQL Database Timeout Example</summary>
 
 ```javascript
 const mysql = require('mysql2/promise');
@@ -80,12 +102,16 @@ async function queryDatabase() {
 
 queryDatabase();
 ```
+</details>
 
 **Why Use It in GP?**  
 We may perform complex database queries (like matching an audio fingerprint). Setting a timeout ensures the query doesn't take too long to process, protecting our server from becoming unresponsive during heavy loads.
 
 ### c. Implementing Timeouts in Express (Backend Web Server)
 For server request and response handling, timeouts can be applied as middleware in Express.js.
+
+<details>
+<summary>Express.js Timeout Example</summary>
 
 ```javascript
 const express = require('express');
@@ -105,6 +131,7 @@ app.get('/', (req, res) => {
 
 app.listen(3000, () => console.log('Server is running on port 3000'));
 ```
+</details>
 
 **Why Use It in GP?**  
 This prevents the server from waiting indefinitely on requests (e.g., waiting too long for an audio file upload). If the timeout is exceeded, the server can return an error response and free up resources for other users.
@@ -116,5 +143,11 @@ This prevents the server from waiting indefinitely on requests (e.g., waiting to
 - **Mitigates Attacks**: Timeouts protect against attacks like slowloris by disconnecting clients that intentionally slow down communication.
 
 ## 5. Future Implementation Considerations
-- **Adjust Timeouts for Different Scenarios**: For example, we might want a shorter timeout for user authentication but a longer timeout for song recognition.
-- **Graceful Handling of Canceled Requests**: When the client-side cancels a request (e.g., song upload), the backend may continue processing it. Implement proper cancellation logic if needed, though this is often complex.
+- [ ] Adjust timeouts for different scenarios (e.g., shorter for authentication, longer for song recognition)
+- [ ] Implement graceful handling of canceled requests
+- [ ] Set up monitoring and alerts for frequent timeout occurrences
+- [ ] Optimize database queries and API calls to reduce the likelihood of timeouts
+
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
